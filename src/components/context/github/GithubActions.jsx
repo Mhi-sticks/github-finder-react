@@ -9,7 +9,7 @@ const github = axios.create({
   timeout: 1000,
   headers: {
     Accept: "application/vnd.GitHub.v3+json",
-    Authorization: "token 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",
+    // Authorization: "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",
   },
 });
 
@@ -67,8 +67,8 @@ export const searchUsers = async (text) => {
 //get user and repos
 export const getUserAndRepos = async (login) => {
   const [user, repos] = await Promise.all([
-    github.get(`/user/${login}`),
-    github.get(`/user/${login}/repos`),
+    github.get(`/users/${login}`),
+    github.get(`/users/${login}/repos`),
   ]);
   return { user: user.data, repo: repos.data };
 };
