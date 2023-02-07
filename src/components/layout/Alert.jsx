@@ -1,32 +1,26 @@
-import { useContext } from "react";
-import AlertContext from "../context/alert/AlertContext";
+import {useContext } from "react"
+import AlertContext from "../context/alert/AlertContext"
+import {BiErrorCircle} from 'react-icons/bi'
+import {TiTick} from 'react-icons/ti'
+const Alert = () => {
+  //Global state from Alert Context
+    const {alert} = useContext(AlertContext);
 
-function Alert() {
-  const { alert } = useContext(AlertContext);
+  if (alert !== null && alert.type === 'error') return (
+    <>
+    <div className="text-red-600 dark:text-red-900 flex gap-6 items-center bg-slate-200 dark:bg-slate-400 w-fit  pl-3 rounded-sm absolute top-16 right-4 after:content-[''] after:w-1 after:h-12 after:bg-red-600">
+      <BiErrorCircle size={20} className="text-red-600 dark:text-red-900"/>
+      {alert.msg}</div>
+      </>
+  )
 
-  return (
-    alert !== null && (
-      <p className="flex items-start mb-4 space-x-2">
-        {alert.type === "error" && (
-          <svg
-            className="w-6 h-6 flex-none mt-0 5"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle cx="12" cy="12" r="12" fill="#FECDD3"></circle>
-            <path
-              d="M8 8l8 8M16 8l-8 8"
-              stroke="#B91C1C"
-              strokeWidth="2"
-            ></path>
-          </svg>
-        )}
-       <p className="flex-1 text-base font-semibold leading-7 text-white">
-<strong>{alert.msg}</strong>
-       </p>
-      </p>
-    )
-  );
-}
+  if (alert !== null && alert.type === 'success') return (
+    <>
+    <div className="text-green-600 dark:text-green-900 flex gap-6 items-center bg-slate-200 dark:bg-slate-400 w-fit  pl-3 rounded-sm absolute top-16 right-4 after:content-[''] after:w-1 after:h-12 after:bg-green-600">
+      <TiTick size={20} className="text-green-600 dark:text-green-900"/>
+      {alert.msg}</div>
+      </>
+  )
+  }
 
-export default Alert;
+export default Alert 
